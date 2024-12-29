@@ -1,0 +1,577 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #e60012;
+    --primary-hover: #cc0000;
+    --bg-color: #fff5f5;
+    --card-bg: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #ffcdd2;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 渐变文字效果只应用于文字部分 */
+.header h1:not(.emoji) {
+    background: linear-gradient(120deg, #e60012, #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+/* emoji 保持原有颜色 */
+.header h1 .emoji {
+    background: none;
+    -webkit-text-fill-color: initial;
+}
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(196, 30, 58, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(196, 30, 58, 0.8);
+    }
+}
+
+.message-form {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.message-form:hover {
+    transform: translateY(-2px);
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #c41e3a;
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+button {
+    background: linear-gradient(120deg, #c41e3a, #a01830);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(120deg, #a01830, #c41e3a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.tabs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.messages {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.message {
+    padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #ffffff, #fff5f5);
+    border: 1px solid rgba(230, 0, 18, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(230, 0, 18, 0.1);
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message:hover {
+    transform: translateX(4px);
+}
+
+.message:last-child {
+    margin-bottom: 0;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+/* 为作者名字单独添加样式 */
+.author-name {
+    background: linear-gradient(120deg, #d4af37, #f4c430);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.message-time {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+}
+
+.message-content {
+    color: var(--text-primary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 32px;
+    font-style: italic;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-title {
+    font-size: 1.2em;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.radio-group {
+    margin-bottom: 20px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.radio-option input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    width: auto;
+}
+
+.confirm-button {
+    background: var(--primary-color);
+    color: white;
+}
+
+.cancel-button {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.featured-badge {
+    background: linear-gradient(120deg, #e60012, #ff9500);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-left: 8px;
+    animation: badgeGlow 2s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(196, 30, 58, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(196, 30, 58, 0.8);
+    }
+}
+
+.success-message {
+    color: #059669;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .message-form, .messages {
+        padding: 16px;
+    }
+}
+/* 添加以下样式到原有的 CSS 中 */
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+/* 修改管理员按钮样式 */
+.admin-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(107, 114, 128, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;  /* 改为圆形 */
+    width: 50px;        /* 固定宽度 */
+    height: 50px;       /* 固定高度 */
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;     /* 确保按钮始终在顶层 */
+}
+
+.admin-button:hover {
+    background-color: rgba(75, 85, 99, 0.9);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.admin-mode .admin-button {
+    background-color: rgba(5, 150, 105, 0.8);
+}
+
+.admin-mode .admin-button:hover {
+    background-color: rgba(4, 120, 87, 0.9);
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    .admin-button {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 0.75em;
+    }
+}
+
+/* 雪花动画 */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.snowflake {
+    position: fixed;
+    color: #fff;
+    font-size: 1em;
+    text-shadow: 0 0 5px rgba(0,0,0,0.1);
+    animation: snowfall 10s linear infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100%) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 为每个雪花设置不同的动画延迟和位置 */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 2s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 3s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 4s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 5s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 6s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 7s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 8s; }
+.snowflake:nth-of-type(10) { left: 95%; animation-delay: 9s; }
+
+/* 灯笼和红包动画 */
+.decorations {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.lantern {
+    position: fixed;
+    font-size: 3em;
+    animation: swing 3s ease-in-out infinite;
+}
+
+.lantern.left {
+    left: 5%;
+    top: 10%;
+}
+
+.lantern.right {
+    right: 5%;
+    top: 10%;
+}
+
+.red-packet {
+    position: fixed;
+    font-size: 2em;
+    animation: float 6s ease-in-out infinite;
+}
+
+.red-packet:nth-child(3) { left: 20%; animation-delay: 0s; }
+.red-packet:nth-child(4) { left: 50%; animation-delay: 2s; }
+.red-packet:nth-child(5) { left: 80%; animation-delay: 4s; }
+
+@keyframes swing {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+@keyframes float {
+    0% { top: -10%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+}
+
+.input-group.compact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group.compact input {
+    width: 200px;
+}
+
+/* 回到顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: 80px;  /* 位置在管理员按钮上方 */
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(230, 0, 18, 0.8);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: none;  /* 默认隐藏 */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    background-color: rgba(204, 0, 0, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    .back-to-top {
+        bottom: 70px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+}

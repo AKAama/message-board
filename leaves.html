@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新年祝福墙</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    
+</head>
+<body>
+    <!-- 添加红包和灯笼动画 -->
+    <div class="decorations" aria-hidden="true">
+        <div class="lantern left">🏮</div>
+        <div class="lantern right">🏮</div>
+        <div class="red-packet">🧧</div>
+        <div class="red-packet">🧧</div>
+        <div class="red-packet">🧧</div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji">🏮</span> 新年祝福墙 <span class="emoji">🏮</span></h1>
+            <p>在这里留下你的新年祝福...</p>
+        </div>
+
+        <!-- 简化的输入区域移到最上面 -->
+        <div class="message-form">
+            <div class="input-group compact">
+                <input type="text" id="nameInput" placeholder="你的名字..." maxlength="20">
+                <textarea id="messageInput" placeholder="写下你的新年祝福..." rows="3"></textarea>
+                <button onclick="showModal()">发送祝福</button>
+            </div>
+        </div>
+
+        <!-- 留言展示区 -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('featured')">精选祝福</div>
+            <div class="tab" onclick="switchTab('normal')">所有祝福</div>
+        </div>
+
+        <div id="featuredMessages" class="messages">
+            <!-- 精选留言将在这里显示 -->
+        </div>
+
+        <div id="normalMessages" class="messages" style="display: none;">
+            <!-- 普通留言将在这里显示 -->
+        </div>
+    </div>
+
+    <!-- 修改对话框内容 -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-title">张忠义帅吗？</div>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="answer" value="yes"> 帅的一！
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="answer" value="no"> 一般吧~
+                </label>
+            </div>
+            <div id="sincereMessage" class="success-message" style="display: none;">
+                新年快乐！🧨
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button" onclick="closeModal()">取消</button>
+                <button class="modal-button confirm-button" onclick="submitMessage()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="admin-button" onclick="toggleAdmin()" title="管理员模式">
+        管理
+    </button>
+
+    <button class="back-to-top" id="backToTop" title="回到顶部">
+        ⬆️
+    </button>
+</body>
+</html>
